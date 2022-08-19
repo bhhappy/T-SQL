@@ -8,10 +8,10 @@ select * from Shippers
 --Q2. Select only name & description from the category table
 select CategoryName, Description from Categories
 
---Q3. Weíd like to see just the FirstName, LastName, and HireDate of all the employees with the Title of Sales Representative.
+--Q3. We‚Äôd like to see just the FirstName, LastName, and HireDate of all the employees with the Title of Sales Representative.
 select FirstName, LastName, HireDate from Employees where Title = 'Sales Representative'
 
---Q4. Now weíd like to see the same columns as above, but only for those employees that both have the title of 
+--Q4. Now we‚Äôd like to see the same columns as above, but only for those employees that both have the title of 
 -- Sales Representative, and also are in the United States.
 select FirstName, LastName, HireDate from Employees where Title = 'Sales Representative' and 
 Country = 'USA'
@@ -23,15 +23,15 @@ select * from Orders where EmployeeID = 5
 --whose ContactTitle is not Marketing Manager.
 select SupplierID, ContactName, ContactTitle from Suppliers where ContactTitle != 'Marketing Manager'
 
---Q7. In the products table, weíd like to see the ProductID and ProductName for those products where the
---ProductName includes the string ìquesoî.
+--Q7. In the products table, we‚Äôd like to see the ProductID and ProductName for those products where the
+--ProductName includes the string ‚Äúqueso‚Äù.
 select ProductID, ProductName from Products where ProductName like '%queso%'
 
 --Q8. Write a query that shows the OrderID, CustomerID, and ShipCountry for the orders where
 -- the ShipCountry is either France or Belgium.
 select OrderID, CustomerID,  ShipCountry from Orders where ShipCountry = 'France' or ShipCountry = 'Belgium'
 
---Q9. we want to show all the orders from any Latin American country. But we donít have a list of 
+--Q9. we want to show all the orders from any Latin American country. But we don‚Äôt have a list of 
 -- Latin American countries : Brazil Mexico Argentina Venezuela
 select * from Orders where ShipCountry in ('Brazil','Mexico', 'Argentina', 'Venezuela')
 
@@ -40,7 +40,7 @@ select * from Orders where ShipCountry in ('Brazil','Mexico', 'Argentina', 'Vene
 select FirstName, LastName, Title, BirthDate from Employees order by BirthDate
 
 -- Q11. In the output of the query above, showing the Employees in order of BirthDate, we see the time of
---the BirthDate field, which we donít want. Show only the date portion of the BirthDate field.
+--the BirthDate field, which we don‚Äôt want. Show only the date portion of the BirthDate field.
 select FirstName, LastName, Title, cast(BirthDate as date) as BirthDate from Employees order by BirthDate
 -- Or
 select FirstName, LastName, Title, convert(date, BirthDate, 105) as BirthDate from Employees order by BirthDate
@@ -50,7 +50,7 @@ select FirstName, LastName, Title, convert(date, BirthDate, 105) as BirthDate fr
 select FirstName, LastName, concat(FirstName,' ', LastName) as FullName from Employees
 
 --Q13. In the OrderDetails table, we have the fields UnitPrice and Quantity. Create a new field, TotalPrice, 
---that multiplies these two together. Weíll ignore the Discount field for now. In addition, show the 
+--that multiplies these two together. We‚Äôll ignore the Discount field for now. In addition, show the 
 --OrderID, ProductID, UnitPrice, and Quantity. Order by OrderID and ProductID.
 select OrderID, ProductID, UnitPrice, Quantity, (UnitPrice * Quantity) as TotalPrice from OrderDetails
 order by OrderID, ProductID
@@ -70,14 +70,14 @@ select country from Customers group by Country
 --count for each ContactTitle.
 select ContactTitle, count(ContactTitle) as countTitles from Customers group by ContactTitle
 
---Q18. Weíd like to show, for each product, the associated Supplier. Show the ProductID, ProductName, and the
+--Q18. We‚Äôd like to show, for each product, the associated Supplier. Show the ProductID, ProductName, and the
 --CompanyName of the Supplier. Sort by ProductID.
 select  P.ProductID, P.ProductName, S.CompanyName from Products P left join Suppliers S 
 on P.SupplierID = S.SupplierID
 
---Q19. Weíd like to show a list of the Orders that were made, including the Shipper that was used. Show the
+--Q19. We‚Äôd like to show a list of the Orders that were made, including the Shipper that was used. Show the
 --OrderID, OrderDate (date only), and CompanyName of the Shipper, and sort by OrderID.
---In order to not show all the orders (thereís more than 800), show only those rows with an OrderID of less
+--In order to not show all the orders (there‚Äôs more than 800), show only those rows with an OrderID of less
 --than 10300.
 select O.OrderID, cast(O.OrderDate as date) as OrderDate, S.CompanyName from Orders O left join Shippers S on 
 O.ShipVia = S.ShipperID where O.OrderID <10300 order by O.OrderID
